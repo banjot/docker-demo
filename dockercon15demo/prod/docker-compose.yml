@@ -4,7 +4,6 @@ haproxy:
     service: haproxy-server
   links:
     - web
-
 # only needed for dockercon demo
 #  environment:
 #   - "constraint:node==swarm-0"
