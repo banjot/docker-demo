@@ -2,17 +2,24 @@ haproxy:
   extends:
     file: haproxy.yml
     service: haproxy-server
-  environment:
-    - "constraint:node==swarm-0"
+  links:
+    - web
+
+# only needed for dockercon demo
+#  environment:
+#   - "constraint:node==swarm-0"
 web:
   image: alvinr/demo-webapp
   extends:
     file: haproxy.yml
     service: haproxy-app
+  links:
+    - mongodb
   environment:
     - MONGO_HOST=prod_mongodb_1
 mongodb:
   image: mongo
-  environment:
-    - "constraint:node==swarm-0"
+# only needed for dockercon demo
+#  environment:
+#    - "constraint:node==swarm-0"
   command: --smallfiles --noprealloc
